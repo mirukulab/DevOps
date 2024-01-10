@@ -1,0 +1,20 @@
+require 'rubygems'
+begin
+  gem "net-ping"
+rescue Gem::LoadError
+  system('gem install net-ping')
+  Gem.clear_paths
+end
+require 'net/ping'
+
+def is_vm_up(host)
+  check = Net::Ping::External.new(host)
+  if check.ping?
+    "Yah its up!"
+  else
+    "Houston we have a problem!"
+  end
+end
+
+# replace 'your_vm_ip' with your VM's IP address or hostname
+puts is_vm_up('your_vm_ip')
