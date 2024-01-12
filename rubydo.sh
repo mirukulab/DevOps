@@ -24,6 +24,7 @@ gem install rake
 gem install chef
 gem install knife
 gem install capistrano
+gem install net-ping
 
 # Rehash rbenv shims (to keep everything up-to-date)
 rbenv rehash
