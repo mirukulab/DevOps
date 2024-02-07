@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# Check if the script is being run as root
+if [ "$(id -u)" -ne 0 ]; then
+    echo "This script must be run with sudo or as root" 1>&2
+    exit 1
+fi
+
+# Prompt for username
+read -p "Enter username for the new user: " username
+
+# Create the user
+adduser "$username"
+
+# Add the user to the sudo group
+usermod -aG sudo "$username"
+
+echo "User '$username' created successfully."
+
+# Prompt to switch to the new user
+read -p "Do you want to switch to the new user? (y/n): " choice
+if [ "$choice" = "y" ]; then
+    su - "$username"
+fi
+
+exit 0
